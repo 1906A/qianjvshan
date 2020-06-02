@@ -34,7 +34,6 @@ public class BrandController {
     @RequestMapping("addOrEditBrand")
     public void addOrEditBrand(Brand brand,
                                @RequestParam("cids") List<Long> cids){
-
         //判断主键id是否有值
         if(brand.getId()==null){
             brandServie.brandCategorySave(brand,cids);
@@ -42,7 +41,6 @@ public class BrandController {
             //修改
             brandServie.updateBrand(brand,cids);
         }
-
         System.out.println(brand.getId());
     }
 
@@ -66,6 +64,17 @@ public class BrandController {
     public List<Brand> findBrandByCid(@PathVariable("cid")Long cid){
 
         return brandServie.findBrandBycid(cid);
+    }
+
+    /**
+     * 根据品怕id查询品牌对象
+     * @param id
+     * @return
+     */
+    @RequestMapping("findByBrandId")
+    public Brand findByBrandId(@RequestParam("id") Long id){
+
+        return brandServie.findByBrandId(id);
     }
 
 }

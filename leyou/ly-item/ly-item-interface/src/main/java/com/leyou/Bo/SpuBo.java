@@ -30,10 +30,10 @@ public class SpuBo extends Spu {
         this.skus = skus;
     }
 
-    public SpuBo(String cname, String bname) {
-        this.cname = cname;
-        this.bname = bname;
-    }
+//    public SpuBo(String cname, String bname) {
+//        this.cname = cname;
+//        this.bname = bname;
+//    }
 
     public String getCname() {
         return cname;

@@ -4,8 +4,8 @@
 
     <select id="findSpuByPage" resultType="com.leyou.Bo.SpuBo">
         SELECT s.*,
-            s.brand_id brandId,
-            s.create_time createTime,
+            s.brand_id as brandId,
+            s.create_time as createTime,
             b.`name` as bname,
             s.sub_title as subTitle,
           -- (select y1.`name` from tb_category y1 where y1.id=s.cid1) as cid1Name,

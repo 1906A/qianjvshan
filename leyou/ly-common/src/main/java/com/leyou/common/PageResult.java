@@ -1,9 +1,6 @@
 package com.leyou.common;
-
 import java.util.List;
-
 public class PageResult<T> {
-
     private Long total;//总条数
     private List<T> items;//数据
     private Integer titalPage;//总页数
@@ -12,11 +9,13 @@ public class PageResult<T> {
         this.total = total;
     }
 
+    public PageResult() {
+    }
+
     public PageResult(Long total, List<T> items) {
         this.total = total;
         this.items = items;
     }
-
     public PageResult(Long total, List<T> items, Integer titalPage) {
         this.total = total;
         this.items = items;

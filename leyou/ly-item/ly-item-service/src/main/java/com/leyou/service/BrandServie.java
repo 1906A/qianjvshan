@@ -76,4 +76,13 @@ public class BrandServie {
     public List<Brand> findBrandBycid(Long cid) {
         return brandMapper.findBrandBycid(cid);
     }
+
+    /**
+     * 根据品牌id查询品牌对象
+     * @param id
+     * @return
+     */
+    public Brand findByBrandId(Long id) {
+        return brandMapper.selectByPrimaryKey(id);
+    }
 }

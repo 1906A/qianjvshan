@@ -118,42 +118,21 @@
             </div>
             <!--selector-->
             <div class="clearfix selector">
-                <div class="type-wrap">
-                    <div class="fl key">分类</div>
+                <div class="type-wrap" v-for="f in filters" v-show="f.key=='分类'">
+                    <div class="fl key">{{f.key}}</div>
                     <div class="fl value">
-                        <ul class="type-list">
-                            <li>
-                                <a>手机</a>
-                            </li>
-                            <li>
-                                <a>儿童手表</a>
-                            </li>
+                        <ul class="type-list" v-for="opt in f.options">
+                            <li><a>{{opt.name}}</a></li>
                         </ul>
                     </div>
                     <div class="fl ext"></div>
                 </div>
-                <div class="type-wrap logo">
-                    <div class="fl key brand">品牌</div>
+                <div class="type-wrap logo" v-for="f in filters" v-show="f.key=='品牌'">
+                    <div class="fl key brand">{{f.key}}</div>
                     <div class="value logos">
                         <ul class="logo-list">
-                            <li><img src="img/_/phone01.png" /></li>
-                            <li><img src="img/_/phone02.png" /></li>
-                            <li><img src="img/_/phone03.png" /></li>
-                            <li><img src="img/_/phone04.png" /></li>
-                            <li><img src="img/_/phone05.png" /></li>
-                            <li><img src="img/_/phone06.png" /></li>
-                            <li><img src="img/_/phone07.png" /></li>
-                            <li><img src="img/_/phone08.png" /></li>
-                            <li><img src="img/_/phone09.png" /></li>
-                            <li><img src="img/_/phone10.png" /></li>
-                            <li><img src="img/_/phone11.png" /></li>
-                            <li><img src="img/_/phone12.png" /></li>
-                            <li><img src="img/_/phone13.png" /></li>
-                            <li><img src="img/_/phone14.png" /></li>
-                            <li><img src="img/_/phone05.png" /></li>
-                            <li><img src="img/_/phone06.png" /></li>
-                            <li><img src="img/_/phone07.png" /></li>
-                            <li style="text-align: center"><a style="line-height: 30px; font-size: 12px" href="#">黑马</a></li>
+                            <li v-for="opt in f.options"><img :src="opt.image" v-show="opt.image != ''" /></li>
+                            <li v-for="opt in f.options" style="text-align: center" v-show="opt.image == ''"><a style="line-height: 30px; font-size: 12px" href="#">{{opt.name}}</a></li>
                         </ul>
                     </div>
                     <div class="fl ext">
@@ -262,6 +241,16 @@
                     <div class="fl ext">
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
                 <div class="type-wrap" style="text-align: center">
                     <v-btn small flat>
                         更多<v-icon>arrow_drop_down</v-icon>
@@ -282,7 +271,8 @@
                             <li>
                                 <a href="#">销量</a>
                             </li>
-                            <li>
+                            <li @click="orderby('createTime')"
+                                :class="{active:search.sortBy==='createTime'}">
                                 <a href="#">新品</a>
                             </li>
                             <li>
@@ -324,7 +314,7 @@
                                     <em>{{good.selected.title.length >20 ? good.selected.title.substring(0,20):good.selected.title}}</em>
                                 </div>
                                 <div class="cu" :title="good.subTitle">
-                                    <em><span>促</span>{{good.subTitle.length>15 ? good.subTitle.substring(0,15):good.subTitle}}</em>
+                                    <em><span>促</span>{{good.subTitle.length >15 ? good.subTitle.substring(0,15):good.subTitle}}</em>
                                 </div>
                                 <div class="commit">
                                     <i class="command">已有2000人评价</i>
@@ -460,10 +450,16 @@
             },
             goodList: [], //数据模型的集合goods
             total:0,
-            totalPage:0
+            totalPage:0,
+            filters:[]
 
         },
         methods:{
+            orderby(v){
+                this.search.sortBy = v;
+                this.search.descending = !this.search.descending;
+                this.initData();
+            },
             gotoPage(){
                 this.initData();
             },
@@ -498,6 +494,19 @@
                         this.goodList = data.items;
                         this.total = data.total;
                         this.totalPage = data.titalPage;
+
+                        this.filters.push({
+                            key:"分类",
+                            options:data.categoryList
+                        });
+                        this.filters.push({
+                            key:"品牌",
+                            options:data.brandList
+                        });
+                        // data.paramList.forEach(p=>{
+                        //     this.filters.push(p);
+                        // });
+
                     })
                     .catch(error =>{
                 });
@@ -510,6 +519,7 @@
                 search.page=1;
             }
             this.search = search;
+            this.search.sortBy = "createTime";
             this.initData();
         },
         watch:{

@@ -293,10 +293,10 @@
                             </li>
                         </ul>
                         <div class="top-pagination">
-                            <span>共 <i style="color: #222;">7600+</i> 商品</span>
-                            <span><i style="color: red;">2</i>/123</span>
-                            <a class="btn-arrow" href="#" style="display: inline-block">&lt;</a>
-                            <a class="btn-arrow" href="#" style="display: inline-block">&gt;</a>
+                            <span>共 <i style="color: #222;">{{total}}</i> 商品</span>
+                            <span><i style="color: red;">{{search.page}}</i>/{{totalPage}}</span>
+                            <a class="btn-arrow" href="#" style="display: inline-block" @click="prePage">&lt;</a>
+                            <a class="btn-arrow" href="#" style="display: inline-block" @click="nextPage">&gt;</a>
                         </div>
                     </div>
                 </div>
@@ -338,27 +338,27 @@
                         </li>
                     </ul>
                 </div>
-<!--                <div class="fr">-->
-<!--                <div class="sui-pagination pagination-large">-->
-<!--                    <ul>-->
-<!--                        <li class="prev disabled">-->
-<!--                            <a @click="#">«上一页</a>-->
-<!--                        </li>-->
-<!--                        <li :class="{active:search.page==index(i)}" v-for = "i in Math.min(5,totalPage)" @click="search.page = index(i)">-->
-<!--                            <a href="#">{{index(i)}}</a>-->
-<!--                        </li>-->
-<!--                        <li class="dotted"><span>...</span></li>-->
-<!--                        <li class="next">-->
-<!--                            <a @click="#">下一页»</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                    <div><span>共10页&nbsp;</span><span>-->
-<!--      到第-->
+                <div class="fr">
+                <div class="sui-pagination pagination-large">
+                    <ul>
+                        <li class="prev " :class="{disabled:search.page == 1}">
+                            <a  @click="prePage">«上一页</a>
+                        </li>
+                        <li :class="{active:search.page==index(i)}" v-for="i in Math.min(5,totalPage)" @click="search.page = index(i)">
+                            <a href="#">{{index(i)}}</a>
+                        </li>
+                        <li class="dotted"><span>...</span></li>
+                        <li class="next" :class="{disabled:search.page == totalPage}">
+                            <a @click="nextPage">下一页»</a>
+                        </li>
+                    </ul>
+                    <div><span>共{{totalPage}}页&nbsp;</span><span>
+      到第
 
-<!--      <input type="text" class="page-num">-->
-<!--      页 <button class="page-confirm" @click="gotoPage">确定</button></span></div>-->
-<!--                </div>-->
-<!--            </div>-->
+      <input type="text" class="page-num" v-model="search.page">
+      页 <button class="page-confirm" @click="gotoPage">确定</button></span></div>
+                </div>
+            </div>
             </div>
             <!--hotsale-->
             <div class="clearfix hot-sale">
@@ -464,6 +464,20 @@
 
         },
         methods:{
+            gotoPage(){
+                this.initData();
+            },
+            prePage(){
+                if(this.search.page >1){
+                    this.search.page -- ;
+                }
+            },
+            nextPage(){
+                //alert(this.search.page)
+                if(this.search.page <this.totalPage){
+                    this.search.page ++ ;
+                }
+            },
             index(i){
               if(this.search.page <=3 || this.totalPage <= 5){
                   return i;
@@ -483,7 +497,7 @@
                         })
                         this.goodList = data.items;
                         this.total = data.total;
-                        this.totalPage = data.totalPage;
+                        this.totalPage = data.titalPage;
                     })
                     .catch(error =>{
                 });

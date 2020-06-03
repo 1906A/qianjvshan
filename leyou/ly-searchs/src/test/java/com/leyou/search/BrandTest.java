@@ -14,8 +14,8 @@ public class BrandTest {
     @Autowired
     BrandClient brandClient;
     @Test
-    public void GoodTest(){
-        Brand brandById = brandClient.findByBrandId(76L);
-        System.out.println(brandById.getId());
+    public void BrandTest(){
+        Brand brandById = brandClient.findByBrandId(2032L);
+        System.out.println(brandById);
     }
 }

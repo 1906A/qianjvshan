@@ -14,17 +14,11 @@ public class SearchResult extends PageResult<Goods> {
     private List<Brand> brandList;
     private List<Map<String,Object>> paramList;
 
-    public SearchResult(Long total, List<Goods> items, Integer titalPage, List<Category> categoryList, List<Brand> brandList, List<Map<String, Object>> paramList) {
+    public SearchResult(Long total, List<Goods> items, Integer titalPage, List<Category> categoryList, List<Brand> brandList,List<Map<String, Object>> paramList) {
         super(total, items, titalPage);
         this.categoryList = categoryList;
         this.brandList = brandList;
         this.paramList = paramList;
-    }
-
-    public SearchResult(Long total, List<Goods> items, Integer titalPage, List<Category> categoryList, List<Brand> brandList) {
-        super(total, items, titalPage);
-        this.categoryList = categoryList;
-        this.brandList = brandList;
     }
 
     public List<Category> getCategoryList() {
@@ -43,4 +37,11 @@ public class SearchResult extends PageResult<Goods> {
         this.brandList = brandList;
     }
 
+    public List<Map<String, Object>> getParamList() {
+        return paramList;
+    }
+
+    public void setParamList(List<Map<String, Object>> paramList) {
+        this.paramList = paramList;
+    }
 }

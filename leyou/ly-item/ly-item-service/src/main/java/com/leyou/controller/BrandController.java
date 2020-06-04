@@ -3,7 +3,7 @@ package com.leyou.controller;
 import com.leyou.common.PageResult;
 import com.leyou.pojo.Brand;
 import com.leyou.pojo.Category;
-import com.leyou.service.BrandServie;
+import com.leyou.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("brand")
 public class BrandController {
-
     @Autowired
-    BrandServie brandServie;
-
+    BrandService brandServie;
     //品牌管理分页查询
     @RequestMapping("page")
     public Object findBrandBypage(@RequestParam("key") String key,
@@ -30,7 +28,6 @@ public class BrandController {
         PageResult<Brand> brandList = brandServie.findBrandSql(key,page,rows,sortBy,desc);
         return brandList;
     }
-
     @RequestMapping("addOrEditBrand")
     public void addOrEditBrand(Brand brand,
                                @RequestParam("cids") List<Long> cids){

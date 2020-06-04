@@ -10,6 +10,7 @@
         <module>ly-common</module>
         <module>ly-upload</module>
         <module>ly-searchs</module>
+        <module>ly-good-s-web</module>
     </modules>
     <dependencies>
         <dependency>

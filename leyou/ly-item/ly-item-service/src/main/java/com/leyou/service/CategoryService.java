@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,5 +59,13 @@ public class CategoryService {
      */
     public Category findCategoryById(Long id) {
         return categoryMapper.selectByPrimaryKey(id);
+    }
+
+    public List<Category> findCategoryByCids(List<Long> ids) {
+        ArrayList<Category> categoryList = new ArrayList<>();
+        ids.forEach(cid ->{
+            categoryList.add(categoryMapper.selectByPrimaryKey(cid));
+        });
+        return categoryList;
     }
 }

@@ -46,9 +46,25 @@ public class SpecParamController {
         return specParamService.findSpecParamByCid(cid);
     }
 
+    /**
+     * 根据三级分类id+搜索条件为1的参数规格参数集合
+     * @param cid
+     * @return
+     */
     @RequestMapping("paramByCid")
     public List<SpecParam> findSpecParamByCidAndSearching(@RequestParam("cid") Long cid){
         return specParamService.findSpecParamByCidAndSearching(cid);
+    }
+
+    /**
+     * 根据三级分类id+是否通用参数值查询
+     * @param cid
+     * @return
+     */
+    @RequestMapping("paramByCidAndGeneric")
+    public List<SpecParam> findParamByCidAndGeneric(@RequestParam("cid") Long cid,
+                                                    @RequestParam("generic") boolean generic){
+        return specParamService.findParamByCidAndGeneric(cid,generic);
     }
 
 }

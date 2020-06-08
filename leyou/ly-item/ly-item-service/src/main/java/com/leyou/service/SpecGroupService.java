@@ -7,6 +7,7 @@ import com.leyou.pojo.SpecParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +29,14 @@ public class SpecGroupService {
     public List<SpecGroup> findSpecGroupList(Long cateGoryId) {
         SpecGroup specGroup = new SpecGroup();
         specGroup.setCid(cateGoryId);
+        //根据分类id查询规格参数组及组内参数列表
+        List<SpecGroup> groupList = new ArrayList<>();
+        groupList = specGroupMapper.select(specGroup);
+        groupList.forEach(group ->{
+            SpecParam param = new SpecParam();
+            param.setGroupId(group.getId());
+            group.setParams(specParamMapper.select(param));
+        });
         return specGroupMapper.select(specGroup);
     }
 

@@ -72,5 +72,15 @@ public class CategoryController {
             return categoryService.findCategoryById(id);
     }
 
+    /**
+     * 根据分类id查询分类名称
+     * @param ids
+     * @return
+     */
+    @RequestMapping("findCategoryByCids")
+    public List<Category> findCategoryByCids(@RequestBody List<Long> ids){
+        return categoryService.findCategoryByCids(ids);
+    }
+
 
 }

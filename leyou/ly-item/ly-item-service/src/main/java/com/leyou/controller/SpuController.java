@@ -2,6 +2,7 @@ package com.leyou.controller;
 
 import com.leyou.Bo.SpuBo;
 import com.leyou.common.PageResult;
+import com.leyou.pojo.Spu;
 import com.leyou.pojo.SpuDetail;
 import com.leyou.service.SpuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,16 @@ public class SpuController {
     public void upOrDown(@RequestParam("spuId") Long spuId,
                          @RequestParam("saleable") int saleable){
         spuService.upOrDown(spuId,saleable);
+    }
+
+    /**
+     * 根据spuid查询spu
+     * @param spuId
+     * @return
+     */
+    @RequestMapping("findSpuBuId")
+    public Spu findSpuBuId(@RequestParam("spuId") Long spuId){
+        return spuService.findSpuBuId(spuId);
     }
 
 

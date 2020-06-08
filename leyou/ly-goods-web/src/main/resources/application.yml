@@ -2,12 +2,14 @@ server:
   port: 8084
 spring:
   application:
-    name: search-service
+    name: goods-service
   data:
     elasticsearch:
       cluster-nodes: 192.168.58.132:9300
   main:
     allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
 eureka:
   client:
     service-url:

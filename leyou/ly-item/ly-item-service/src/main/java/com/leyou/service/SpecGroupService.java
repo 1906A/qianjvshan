@@ -37,7 +37,7 @@ public class SpecGroupService {
             param.setGroupId(group.getId());
             group.setParams(specParamMapper.select(param));
         });
-        return specGroupMapper.select(specGroup);
+        return groupList;
     }
 
     public void deleteBySpecGroupId(Long id) {

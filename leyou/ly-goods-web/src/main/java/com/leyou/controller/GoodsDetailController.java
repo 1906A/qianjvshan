@@ -59,7 +59,7 @@ public class GoodsDetailController {
         List<Sku> skuList = skuClient.findSkuBySpuId(spuId);
 
         //4:查询规格参数组 及组内信息
-        List<SpecGroup> specGroupList = specGroupClient.findSpecGroupList(spu.getCid3());
+        List<SpecGroup> groups = specGroupClient.findSpecGroupList(spu.getCid3());
 
         //5:三级分类  cid  + generic =0    List
         List<Category> categoryList = categoryClient.findCategoryByCids(
@@ -79,7 +79,7 @@ public class GoodsDetailController {
         model.addAttribute("spu",spu);
         model.addAttribute("spuDetail",spuDetail);
         model.addAttribute("skuList",skuList);
-        model.addAttribute("specGroupList",specGroupList);
+        model.addAttribute("groups",groups);
         model.addAttribute("categoryList",categoryList);
         model.addAttribute("paramMap",paramMap);
         model.addAttribute("brand",brand);

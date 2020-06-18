@@ -28,7 +28,7 @@ public class MessageListener {
         System.out.println("结束监听修改ES数据,spuId="+spuId+"修改成功");
     }
 
-    /**@RabbitListener(bindings = @QueueBinding(
+    @RabbitListener(bindings = @QueueBinding(
             value =@Queue(name = "item.delete.search.queue",durable = "true"),
             exchange =@Exchange(name = "item.exchanges",ignoreDeclarationExceptions = "true",
                     type = ExchangeTypes.TOPIC),
@@ -41,5 +41,5 @@ public class MessageListener {
         }
         goodService.deleteEsData(spuId);
         System.out.println("结束监听删除ES数据,spuId="+spuId+"删除成功");
-    }*/
+    }
 }

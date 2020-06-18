@@ -136,7 +136,7 @@ public class GoodService {
         goodsRepository.save(goods);
     }
 
-    /**public void deleteEsData(Long spuId) {
+    public void deleteEsData(Long spuId) {
         goodsRepository.deleteById(spuId);
-    }*/
+    }
 }

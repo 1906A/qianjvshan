@@ -145,7 +145,6 @@ public class SpuService {
             sku.setCreateTime(nowDate);
             sku.setLastUpdateTime(nowDate);
             skuMapper.insert(sku);
-
             //库存
             Stock stock = new Stock();
             stock.setSkuId(sku.getId());
@@ -171,7 +170,7 @@ public class SpuService {
         //删除spu
         spuMapper.deleteByPrimaryKey(spuId);
         //删除商品发送mq消息
-        //this.sendMsg("delete",spuId);
+        this.sendMsg("delete",spuId);
     }
 
     /**

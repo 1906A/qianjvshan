@@ -92,6 +92,7 @@ public class GoodService {
             context.setVariables(this.item(spuId));
             //写入文件
             File file = new File("D:\\ruanjan\\nginx\\nginx-1.16.1\\nginx-1.16.1\\html\\"+spuId+".html");
+
             writer = new PrintWriter(file);
             //执行静态化
             templateEngine.process("item",context,writer);
@@ -110,10 +111,10 @@ public class GoodService {
      * 删除静态页面
      * @param spuId
      */
-    /**public void deleteHtml(Long spuId) {
+    public void deleteHtml(Long spuId) {
         File file = new File("D:\\ruanjan\\nginx\\nginx-1.16.1\\nginx-1.16.1\\html\\"+spuId+".html");
         if(file!=null && file.exists()){
             file.delete();
         }
-    }*/
+    }
 }
